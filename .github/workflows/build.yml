@@ -9,9 +9,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Setup Theos Environment
-      uses: upm-to-ros/setup-theos@v1
-      with:
-        theos-src: 'theos/theos'
+      uses: theos/setup-theos@v1
 
     - name: Download iOS SDK
       run: |
