@@ -13,6 +13,10 @@ jobs:
       with:
         theos-src: 'theos/theos'
 
+    - name: Download iOS SDK
+      run: |
+        git clone https://github.com/theos/sdks.git $THEOS/sdks
+
     - name: Compile iOS Tweak
       run: |
         make package
