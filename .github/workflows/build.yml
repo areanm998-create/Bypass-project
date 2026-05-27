@@ -8,13 +8,21 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4
 
-    - name: Setup Theos Environment
-      uses: theos/setup-theos@v1
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential curl git software-properties-common
+
+    - name: Clone Theos
+      run: |
+        git clone --recursive https://github.com/theos/theos.git $GITHUB_WORKSPACE/theos
+        echo "THEOS=$GITHUB_WORKSPACE/theos" >> $GITHUB_ENV
 
     - name: Download iOS SDK
       run: |
-        git clone https://github.com/theos/sdks.git $THEOS/sdks
+        git clone https://github.com/theos/sdks.git $GITHUB_WORKSPACE/theos/sdks
 
-    - name: Compile iOS Tweak
+    - name: Compile Tweak
       run: |
+        export THEOS=$GITHUB_WORKSPACE/theos
         make package
