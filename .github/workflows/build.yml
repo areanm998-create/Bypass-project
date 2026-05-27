@@ -1,0 +1,18 @@
+name: Build Tweak
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Theos Environment
+      uses: upm-to-ros/setup-theos@v1
+      with:
+        theos-src: 'theos/theos'
+
+    - name: Compile iOS Tweak
+      run: |
+        make package
